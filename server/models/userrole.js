@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete:"CASCADE",
         onUpdate:'CASCADE'
       });
-      userRole.belongsTo(models.role,{
+      userRole.belongsTo(models.Role,{
         foreignKey:'roleId',
         onDelete:'CASCADE',
         onUpdate:"CASCADE"
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       primaryKey:true,
       references:{
-        model:'role',
+        model:'Role',
         key:'id'
       },
       onDelete:'CASCADE',

@@ -2,10 +2,10 @@
 const cors = require('cors');
 const express = require('express');
 const logger = require('morgan');
-require('dotenv').config({ path: './.env' });
+require('dotenv').config({path: '../.env'});
 const errorHandler = require('errorhandler');
 const jwt = require('jsonwebtoken');
-
+const {Sequelize} = require('sequelize')
 /* Create Express Server. */
 const app = express();
 
@@ -13,6 +13,7 @@ app.use(cors());
 
 app.use(logger('tiny'));
 
+console.log(process.env.PORT)
 /* Express Configuration. */
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
@@ -26,6 +27,12 @@ app.get('/', (_req, res) => {
     },
   });
 });
+
+
+const userSignup = require('./routes/UserRoutes/userAuth');
+app.use('/user', userSignup);
+const adminroute=require('./routes/AdminRoute/AdminAuth');
+app.use('/admin',adminroute);
 
 app.use((req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers.authorization; // Express headers are auto converted to lowercase
@@ -51,12 +58,35 @@ app.use((req, res, next) => {
   }
 });
 
+var sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER ,process.env.DB_PASS, {
+  host:process.env.DB_HOST,
+  dialect: "mysql"
+});
+
+
+const a =async ()=>{
+  console.log('------------------------------->')
+  try{
+  await sequelize.authenticate();
+    console.log('connected')
+}catch(err){
+    console.log(err)
+  }
+
+}
+
+a();
+
+
+
 /**
  * * Error Handler. Provides full stack - disabled from production
  */
 if (process.env.NODE_ENV !== 'production') {
   app.use(errorHandler());
 }
+
+
 
 app.use((err, _req, res, next) => {
   if (!err) {

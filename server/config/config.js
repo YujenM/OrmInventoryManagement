@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" });
+require("dotenv").config();
 
 module.exports = {
   development: {
@@ -7,6 +7,8 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: "mysql",
+    port:3306,
+    dialectModule: require('mysql2'),
     dialectOptions: {
       connectTimeout: 3000,
       dateStrings: true,
