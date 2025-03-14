@@ -33,6 +33,8 @@ const userSignup = require('./routes/UserRoutes/userAuth');
 app.use('/user', userSignup);
 const adminroute=require('./routes/AdminRoute/AdminAuth');
 app.use('/admin',adminroute);
+const SuperAdminRoute=require('./routes/SuperadminRoutes/AdminAuth');
+app.use('/SuperAdmin',SuperAdminRoute);
 
 app.use((req, res, next) => {
   let token = req.headers['x-access-token'] || req.headers.authorization; // Express headers are auto converted to lowercase
