@@ -1,4 +1,4 @@
-const { Model, where } = require('sequelize');
+// const { Model, where } = require('sequelize');
 const{User,Role,userRole, sequelize}=require('../../models');
 
 const signupService=async(userData)=>{
