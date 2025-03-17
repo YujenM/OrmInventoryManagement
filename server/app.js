@@ -6,7 +6,7 @@ require('dotenv').config({path: '../.env'});
 const errorHandler = require('errorhandler');
 const jwt = require('jsonwebtoken');
 const {Sequelize} = require('sequelize')
-/* Create Express Server. */
+
 const app = express();
 
 app.use(cors());
@@ -37,12 +37,13 @@ const SuperAdminRoute=require('./routes/SuperadminRoutes/AdminAuth');
 app.use('/SuperAdmin',SuperAdminRoute);
 
 app.use((req, res, next) => {
-  let token = req.headers['x-access-token'] || req.headers.authorization; // Express headers are auto converted to lowercase
+  let token = req.headers['x-access-token'] || req.headers.authorization; 
   if (token && token.startsWith('Bearer ')) {
     token = token.slice(7, token.length);
   }
   if (token) {
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      req.decoded = decoded;
       if (err) {
         res.status(403).json({
           success: false,
@@ -64,7 +65,8 @@ var sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER ,process.e
   host:process.env.DB_HOST,
   dialect: "mysql"
 });
-
+const getUserRoute=require('./routes/getUserRoute/index');
+app.use('/fetchuser',getUserRoute);
 
 const a =async ()=>{
   console.log('------------------------------->')

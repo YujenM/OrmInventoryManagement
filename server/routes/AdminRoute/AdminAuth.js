@@ -6,4 +6,4 @@ console.log(controller)
 router.route('/signup').post(controller);
 router.route('/login').post(signupController)
 
-module.exports=router
+module.exports=router;
