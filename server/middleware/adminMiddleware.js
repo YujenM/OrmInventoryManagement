@@ -14,6 +14,7 @@ const isAdmin = async (req, res, next) => {
             where: { id: userId },
             include: [{
                 model: Role,
+                where:{name:'admin'},
                 through: 'userRole',
                 attributes: ['name']
             }]
@@ -21,17 +22,17 @@ const isAdmin = async (req, res, next) => {
 
         if (!existingUser) {
             return res.status(400).json({
-                error: "User not found"
+                error: "UnAuthorized: User Doesnot have admin privilages"
             });
         }
 
-        const roles = existingUser.Roles ? existingUser.Roles.map(role => role.name) : [];
+        // const roles = existingUser.Roles ? existingUser.Roles.map(role => role.name) : [];
 
-        if (!roles.includes('admin')) {
-            return res.status(403).json({
-                error: "Unauthorized: User does not have admin privileges"
-            });
-        }
+        // if (!roles.includes('admin')) {
+        //     return res.status(403).json({
+        //         error: "Unauthorized: User does not have admin privileges"
+        //     });
+        // }
 
         next(); 
 

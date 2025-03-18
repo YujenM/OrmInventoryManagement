@@ -12,21 +12,15 @@ const checkisAdmin=(req,res)=>{
             where:{id:userId},
             include:[{
                 model:Role,
+                where: { name: { [Op.in]: ['admin', 'superadmin'] } },
                 through:'userRole',
                 attributes:['name'],
             }]
         });
-        if(!exsitinguser){
-            res.status(400).json({
-                Error:'User Not found'
-            })
+        if (!exsitinguser) {
+            return res.status(403).json({ error: "Unauthorized: Admin or Superadmin access required" });
         }
-        const roles=exsitinguser.Roles? exsitinguser.Roles.map(role=>role.name):[];
-        if(!roles.includes('admin')&& !roles.includes('superAdmin')){
-            res.status(403).json({
-                error:"UnAuthorized : User doesnot have privilages of Admin or superAdmin"
-            })
-        };
+        req.user = existingUser;
         next();
 
     }catch(err){

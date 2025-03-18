@@ -1,6 +1,5 @@
-const { where } = require('sequelize');
 const{User,Role}=require('../models');
-const { includes } = require('lodash');
+
 const isSuperAdmin=async(req,res)=>{
     const userid=req.decoded.id;
     if(!userid){
@@ -12,21 +11,17 @@ const isSuperAdmin=async(req,res)=>{
         where:{id:userid},
         include:[{
             model:Role,
+            where:{name:'superAdmin'},
             through:'userRole',
             attributes:['name'],
         }]
     });
     if(!existingUser){
         return res.status(400).json({
-            Error:'SuperAdmin not found'
+            Error:'Unauthorized: SuperAdmin not found'
         });
     }
-    const roles=existingUser.Roles?existingUser.Roles.map(role=>role.name):[];
-    if(!roles.includes('superAdmin')){
-        return res.status(403).json({
-            error:'Unauthorized: User doesnot have SuperAdmin privilages'
-        })
-    }
+
 }
 
 module.exports=isSuperAdmin;
