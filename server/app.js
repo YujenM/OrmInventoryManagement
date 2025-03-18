@@ -74,7 +74,8 @@ app.use('/fetchuser',getUserRoute);
 // const isAdmin = require('./middleware/adminMiddleware')
 const createItem=require('./routes/AdminRoute/AdminAuth');
 app.use('/adminCrud', createItem)
-
+const itemRoute=require('./routes/Items/getitem');
+app.use('/Items',itemRoute)
 const a =async ()=>{
   try{
   await sequelize.authenticate();
