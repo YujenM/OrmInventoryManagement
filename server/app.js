@@ -59,7 +59,9 @@ app.use((req, res, next) => {
       error: 'Auth Token is not supplied',
     });
   }
+
 });
+
 
 var sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER ,process.env.DB_PASS, {
   host:process.env.DB_HOST,
@@ -68,8 +70,12 @@ var sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER ,process.e
 const getUserRoute=require('./routes/getUserRoute/index');
 app.use('/fetchuser',getUserRoute);
 
+
+// const isAdmin = require('./middleware/adminMiddleware')
+const createItem=require('./routes/AdminRoute/AdminAuth');
+app.use('/adminCrud', createItem)
+
 const a =async ()=>{
-  console.log('------------------------------->')
   try{
   await sequelize.authenticate();
     console.log('connected')
