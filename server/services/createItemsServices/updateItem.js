@@ -9,8 +9,8 @@ const updateItemService = async (userId, itemId, updateData) => {
         throw new Error("Item not found");
     }
 
-    const user = await User.findByPk(userId, {
-        include: {
+const user = await User.findByPk(userId, {
+          include: {
             model: Role,
             where: {
                 name: { [Op.in]: ['admin', 'superadmin'] }
