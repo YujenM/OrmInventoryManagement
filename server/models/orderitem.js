@@ -18,13 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     itemId: {
       type:DataTypes.INTEGER,
       allowNull:false,
-      primaryKey:true,
-      references:{
-        model:'Item',
-        key:'id'
-      },
-      onDelete:'CASCADE',
-      onUpdate:'CASCADE'
     },
     quantity:{
       type:DataTypes.INTEGER,
@@ -33,13 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     orderId: {
       type:DataTypes.INTEGER,
       allowNull:false,
-      primaryKey:true,
-      references:{
-        model:'Order',
-        key:'id'
-      },
-      onDelete:'CASCADE',
-      onUpdate:'CASCADE'
     }
   }, {
     sequelize,

@@ -12,7 +12,10 @@ const createItemcontroller=async(req,res)=>{
             });
         }
         const response=await createItemService({name,description,price,stock,userId});
-        return res.status(200).json(response);
+        return res.status(200).json({
+            success:true,
+            response:response
+        });
     }catch(err){
         return res.status(500).json({
             Error:err.message

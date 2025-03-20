@@ -11,7 +11,7 @@ const isAdmin=require('../../middleware/adminMiddleware');
 router.route('/signup').post(controller);
 router.route('/login').post(signupController)
 router.route('/createItem').post(isAdmin,createItemcontroller);
-router.route('/updateItem/:id').put(updateItemController);
+router.route('/updateItem/:itemId').put(updateItemController);
 router.route('/deleteItem/:id').delete(deleteItemController);
 
 module.exports=router;
