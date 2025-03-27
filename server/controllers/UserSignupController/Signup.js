@@ -1,6 +1,6 @@
 const signupservice=require('../../services/userSignupService/signupService');
 
-const controller = async (req, res) => {
+const controller = async (req, res,next) => {
     try {
         const { name, email, password, address } = req.body;
         if (!name || !email || !password || !address) {
@@ -13,10 +13,7 @@ const controller = async (req, res) => {
         return res.status(201).json(response);
 
     } catch (er) {
-        console.log(er)
-        return res.status(500).json({
-            error: er.message || 'Signup Failed',
-        });
+        next(er);
     }
 };
 

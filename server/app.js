@@ -29,14 +29,15 @@ app.get('/', (_req, res) => {
 });
 
 
-const userSignup = require('./routes/UserRoutes/userAuth');
-app.use('/user', userSignup);
+// const userSignup = ;
+app.use('/user', require('./routes/UserRoutes/userAuth'));
 const adminroute=require('./routes/AdminRoute/AdminAuth');
 app.use('/admin',adminroute);
 const SuperAdminRoute=require('./routes/SuperadminRoutes/AdminAuth');
 app.use('/SuperAdmin',SuperAdminRoute);
 
 app.use((req, res, next) => {
+  console.log(req.body)
   let token = req.headers['x-access-token'] || req.headers.authorization; 
   if (token && token.startsWith('Bearer ')) {
     token = token.slice(7, token.length);

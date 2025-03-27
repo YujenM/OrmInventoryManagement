@@ -1,4 +1,6 @@
 const { User, Role, userRole, sequelize } = require('../../models');
+const { ValidationError }=require ('../../errors');
+
 
 const signupservice = async (userData) => {
     const transaction = await sequelize.transaction();
@@ -12,7 +14,7 @@ const signupservice = async (userData) => {
 
     if (checkexistinguser) {
         await transaction.rollback();
-        throw new Error('User Email already exists in the database');
+        throw new ValidationError("User Email already exists in the database",409)
     }
 
     const newUser = await User.create(userData, { transaction });
@@ -26,7 +28,7 @@ const signupservice = async (userData) => {
 
     if (!userroleData) {
         await transaction.rollback();
-        throw new Error('Role not found');
+        throw new ValidationError("Role not found",404);
     }
 
     await userRole.create({

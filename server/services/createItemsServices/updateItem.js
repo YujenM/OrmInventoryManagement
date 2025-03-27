@@ -2,10 +2,6 @@ const { Op } = require('sequelize');
 const { Item, User, Role } = require('../../models');
 
 const updateItemService = async (userId, itemId, updateData) => {
-    console.log("Extracted Item ID:", itemId);
-    console.log("Extracted User ID:", userId);
-    console.log(updateData)
-
     const item = await Item.findByPk(itemId);
     
     if (!item) throw new Error("Item not found");
