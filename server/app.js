@@ -6,9 +6,11 @@ require('dotenv').config({path: '../.env'});
 const errorHandler = require('errorhandler');
 const jwt = require('jsonwebtoken');
 const {Sequelize} = require('sequelize')
+const setupSwagger=require('./config/swagger');
 
 const app = express();
 
+setupSwagger(app);
 app.use(cors());
 
 app.use(logger('tiny'));
@@ -76,6 +78,7 @@ app.use('/fetchuser',getUserRoute);
 const createItem=require('./routes/AdminRoute/AdminAuth');
 app.use('/adminCrud', createItem)
 const itemRoute=require('./routes/Items/getitem');
+const swaggerJSDoc = require('swagger-jsdoc');
 app.use('/Items',itemRoute)
 const a =async ()=>{
   try{

@@ -55,9 +55,6 @@ describe("Check if only admin can add products to the database, not a user", () 
                 stock: 10
             });
 
-        console.log("Response Status:", response.status);
-        console.log("Response Body:", response.body);
-
         expect(response.status).toBe(403); 
     });
 });
