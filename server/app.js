@@ -2,7 +2,7 @@
 const cors = require('cors');
 const express = require('express');
 const logger = require('morgan');
-require('dotenv').config({path: '../.env'});
+require('dotenv').config({path:'../.env'});
 const errorHandler = require('errorhandler');
 const jwt = require('jsonwebtoken');
 const {Sequelize} = require('sequelize')
@@ -78,8 +78,11 @@ app.use('/fetchuser',getUserRoute);
 const createItem=require('./routes/AdminRoute/AdminAuth');
 app.use('/adminCrud', createItem)
 const itemRoute=require('./routes/Items/getitem');
-const swaggerJSDoc = require('swagger-jsdoc');
+// const swaggerJSDoc = require('swagger-jsdoc');
 app.use('/Items',itemRoute)
+
+const orderRoute=require('./routes/orderRoutes/index');
+app.use('/order',orderRoute)
 const a =async ()=>{
   try{
   await sequelize.authenticate();
