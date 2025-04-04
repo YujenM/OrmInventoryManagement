@@ -2,7 +2,8 @@
 const cors = require('cors');
 const express = require('express');
 const logger = require('morgan');
-require('dotenv').config({path:'../.env'});
+// require('dotenv').config({path:'../.env'});
+require('dotenv').config()
 const errorHandler = require('errorhandler');
 const jwt = require('jsonwebtoken');
 const {Sequelize} = require('sequelize')
