@@ -25,23 +25,24 @@ jobs:
           --health-retries=3
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./server
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./server
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.PERSONALACESSTOKEN }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.PERSONALACESSTOKEN }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
 
-    - name: Build Docker image
-      run: docker build -t oiltom/express-sequelize:latest .
-
-    - name: Push Docker image to Docker Hub
-      run: docker push oiltom/express-sequelize:latest
+      - name: Build and push to dockerhub
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server  
+          push: true
+          tags: oiltom/express-sequelize:latest
