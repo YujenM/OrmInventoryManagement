@@ -1,14 +1,13 @@
-name: Node.js CI/CD
+name: Node.js CI/CD to Docker Hub
 
 on:
   push:
-    branches: [ "main" ]  # or "master"
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
 
     services:
@@ -38,8 +37,15 @@ jobs:
       run: npm install
       working-directory: ./server
 
+    - name: Run tests
+      run: npm test
+      working-directory: ./server
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.PERSONALACESSTOKEN }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
+
     - name: Build Docker image
-      run: docker build -t inventory-app .
+      run: docker build -t oiltom/express-sequelize:latest .
 
     - name: Push Docker image to Docker Hub
       run: docker push oiltom/express-sequelize:latest
