@@ -32,13 +32,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.PERSONALACESSTOKEN }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
 
       - name: Build and push to dockerhub
         uses: docker/build-push-action@v5
         with:
-          context: ./server  
+          context: . 
           push: true
           tags: oiltom/express-sequelize:latest
