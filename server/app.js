@@ -9,7 +9,19 @@ const jwt = require('jsonwebtoken');
 const {Sequelize} = require('sequelize')
 const setupSwagger=require('./config/swagger');
 
+const session = require('express-session');
+const passport = require('passport');
+
 const app = express();
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 setupSwagger(app);
 app.use(cors());

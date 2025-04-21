@@ -1,11 +1,11 @@
+require('../../config/passport');
 const passport = require('passport');
-const googlePassport=require('../../config/passport');
 
 const googleAuth = passport.authenticate('google-app', { scope: ['profile', 'email'] });
 
 const googleCallback = passport.authenticate('google-app', {
   failureRedirect: '/login',
-  successRedirect: '/dashboard' // Or wherever you want
+  successRedirect: '/dashboard'
 });
 
 const logout = (req, res) => {
