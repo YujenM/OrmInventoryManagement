@@ -1,5 +1,5 @@
 const express=require('express');
-const router=express.Router();
+const   router=express.Router();
 const authController=require('../../controllers/goggleAuth/authController');
 
 router.get('/google',authController.googleAuth);

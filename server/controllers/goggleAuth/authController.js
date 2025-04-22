@@ -5,7 +5,7 @@ const googleAuth = passport.authenticate('google-app', { scope: ['profile', 'ema
 
 const googleCallback = passport.authenticate('google-app', {
   failureRedirect: '/login',
-  successRedirect: '/dashboard'
+  successRedirect: '/dashboard/googleauth'
 });
 
 const logout = (req, res) => {

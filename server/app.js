@@ -53,7 +53,8 @@ app.use('/SuperAdmin',SuperAdminRoute);
 
 const googleauth=require('./routes/googleRoutes/auth');
 app.use('/googleAuth',googleauth);
-
+const dashboard=require('./routes/googleRoutes/dash');
+app.use('/dashboard',dashboard);
 app.use((req, res, next) => {
   console.log(req.body)
   let token = req.headers['x-access-token'] || req.headers.authorization; 
