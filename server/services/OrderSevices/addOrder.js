@@ -14,7 +14,6 @@ const addOrderServices = async (userId, items) => {
         const cacheKey = `order:${userId}:item:${item.itemId}`;
         const cachedOrder=await redisClient.get(cacheKey);
         if(cachedOrder){
-            console.log("Here------>")
             throw new ValidationError(`You have already ordered item ID: ${item.itemId}`);
         }
 
