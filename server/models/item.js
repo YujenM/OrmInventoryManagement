@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       allowNull:false
     },
+    itemImage:{
+      type:DataTypes.STRING,
+      allowNull:true,
+      defaultValue:'https://res.cloudinary.com/dqj0xg3zv/image/upload/v1698230982/Default-Image-Placeholder-300x300.png'
+    },
     userId: {
       type:DataTypes.INTEGER,
       allowNull:false,

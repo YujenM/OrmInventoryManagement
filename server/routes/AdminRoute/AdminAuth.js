@@ -6,12 +6,12 @@ const{createItemcontroller}=require('../../controllers/ItemsController/createIte
 const{updateItemController}=require('../../controllers/ItemsController/updateItemController');
 const{deleteItemController}=require('../../controllers/ItemsController/deleteItemController');
 const isAdmin=require('../../middleware/adminMiddleware');
-
+const upload=require('../../middleware/cloudinary');
 
 router.route('/signup').post(controller);
 router.route('/login').post(signupController)
-router.route('/createItem').post(isAdmin,createItemcontroller);
-router.route('/updateItem/:itemId').put(updateItemController);
+router.post("/createItem",isAdmin ,upload.single("itemImage"), createItemcontroller);
+router.route('/updateItem/:itemId').put(isAdmin, upload.single("itemImage"), updateItemController);
 router.route('/deleteItem/:id').delete(deleteItemController);
 
 module.exports=router;

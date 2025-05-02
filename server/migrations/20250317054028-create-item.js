@@ -25,6 +25,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull:false
       },
+      itemImage:{
+        type:Sequelize.STRING,
+        allowNull:true,
+        defaultValue:'https://res.cloudinary.com/dqj0xg3zv/image/upload/v1698230982/Default-Image-Placeholder-300x300.png'
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull:false,

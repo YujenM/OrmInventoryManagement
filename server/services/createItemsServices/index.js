@@ -1,5 +1,5 @@
 const{Item}=require('../../models');
-const createItemService=async({name,description,price,stock,userId})=>{
+const createItemService=async({name,description,price,stock,userId,image})=>{
     if(!userId){
         throw new Error('UserId not found');
     }
@@ -9,7 +9,8 @@ const createItemService=async({name,description,price,stock,userId})=>{
         description,
         price,
         stock,
-        userId
+        userId,
+        itemImage:image
     })
     return{
         message:"Item Created Succesfully",
