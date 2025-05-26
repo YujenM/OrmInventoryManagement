@@ -11,9 +11,10 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "inventory_items",
-    allowed_formats: ["jpg", "png"],
+    folder: "inventory_items",  
+    allowed_formats: ["jpg", "png","jpeg","gif","webp"],
     public_id: (req, file) => `${Date.now()}-${file.originalname}`,
+
   },
 });
 

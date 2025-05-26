@@ -1,3 +1,4 @@
+const { default: status } = require('http-status');
 const addOrderService = require('../../services/OrderSevices/addOrder');
 
 const addOrdercontroller = async (req, res, next) => {
@@ -22,7 +23,10 @@ const addOrdercontroller = async (req, res, next) => {
     
         return res.status(201).json(result);
       } catch (err) {
-        next(err);
+        // res.status(err.statusCode).json({
+        //   message: err.message,
+        // })
+        next(err)
       }
 };
 

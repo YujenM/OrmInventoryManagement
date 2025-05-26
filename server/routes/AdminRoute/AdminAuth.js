@@ -6,6 +6,7 @@ const{createItemcontroller}=require('../../controllers/ItemsController/createIte
 const{updateItemController}=require('../../controllers/ItemsController/updateItemController');
 const{deleteItemController}=require('../../controllers/ItemsController/deleteItemController');
 const {getItemController}=require('../../controllers/AdminGetItem/getItem');
+const {getOrderController}=require('../../controllers/AdminGetOrder/getOrder');
 const isAdmin=require('../../middleware/adminMiddleware');
 const upload=require('../../middleware/cloudinary');
 
@@ -15,5 +16,6 @@ router.post("/createItem",isAdmin ,upload.single("itemImage"), createItemcontrol
 router.route('/updateItem/:itemId').put(isAdmin, upload.single("itemImage"), updateItemController);
 router.route('/deleteItem/:id').delete(deleteItemController);
 router.route('/getAdminItem').get(isAdmin,getItemController);
+router.route('/getAdminOrder').get(isAdmin,getOrderController);
 
 module.exports=router;

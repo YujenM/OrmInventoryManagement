@@ -5,7 +5,7 @@ const createItemcontroller=async(req,res)=>{
         const userId=req.decoded.id;
         const{name,description,price,stock}=req.body;
         const image=req.file?.path || undefined;
-        console.log(image);
+        console.log("this is cloudinary"+image);
         if(!name||!description||!price||!stock){
             res.status(400).json({
                 Error:"Please Fill all the fields"
